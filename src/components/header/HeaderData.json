@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Create post",
+        "link": "/create"
+    },
+    {
+        "name": "Profile",
+        "link": "/profile"
+    }
+]
