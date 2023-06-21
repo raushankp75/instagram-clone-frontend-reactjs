@@ -35,8 +35,8 @@ const DrawerComponent = () => {
                         ))
                     }
 
-                    <Button sx={{ marginLeft: 'auto', width: '100%', marginTop: '20px'}} variant="contained">Login</Button>
-                    <Button sx={{ marginLeft: 'auto', width: '100%', marginTop: '20px'}} variant="contained">Signup</Button>
+                    <Button sx={{ marginLeft: 'auto', width: '100%', marginTop: '20px'}} variant="contained"><Link to='/' style={{textDecoration: 'none', color: 'white'}} onClick={() => setOpenDrawer(false)}>Signin</Link></Button>
+                    {/* <Button sx={{ marginLeft: 'auto', width: '100%', marginTop: '20px'}} variant="contained">"><Link to='/' style={{textDecoration: 'none', color: 'white'}}>Signup</Link></Button> */}
 
                 </List>
             </Drawer>

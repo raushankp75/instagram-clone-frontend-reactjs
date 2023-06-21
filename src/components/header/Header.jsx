@@ -59,8 +59,8 @@ const Header = () => {
                                     ))
                                 }
 
-                                <Button sx={{ marginLeft: 'auto'}} variant="contained"><Link to='/signin' style={{textDecoration: 'none', color: 'white'}}>Signin</Link></Button>
-                                <Button sx={{ marginLeft: '10px' }} variant="contained"><Link to='/signup' style={{textDecoration: 'none', color: 'white'}}>Signup</Link></Button>
+                                <Button sx={{ marginLeft: 'auto'}} variant="contained"><Link to='/' style={{textDecoration: 'none', color: 'white'}}>Signin</Link></Button>
+                                {/* <Button sx={{ marginLeft: '10px' }} variant="contained"><Link to='/signup' style={{textDecoration: 'none', color: 'white'}}>Signup</Link></Button> */}
                             </>
                         )
                     }
