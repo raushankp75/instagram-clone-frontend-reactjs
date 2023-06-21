@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import Signin from '../pages/Signin';
+import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import { Grid } from '@mui/material';
 
@@ -56,7 +56,7 @@ const SigninSignupContainer = () => {
                     <Tab label="Signup" />
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    <Signin handleChange={handleChange} />
+                    <Login handleChange={handleChange} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Signup />

@@ -29,19 +29,23 @@ const Signup = () => {
     }
 
 
-    // const emailRegex = /^\w+([\.-]?\w)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const emailRegex = /^\w+([\.-]?\w)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 
     // for post data to the api
     const Signup = (e) => {
         e.preventDefault()
         // console.log(data);
 
-        // checking email
-        // if(!emailRegex.test(email)){
-        //     console.log('true')
-        //     // 'invalid email' in toastify
-        //     return
-        // }
+        // checking email validation
+        if(!emailRegex.test(data.email)){
+            // console.log('true')
+            toast.error('Email must be required to signup or Invalid email');
+            return
+        }else if(!passRegex.test(data.password)){
+            toast.error('Password must contain at least eight characters, at least 1 no. & 1 char, include upper & lowercase letters & special characters like #,!,? etc')
+            return
+        }
 
         axios.post('http://localhost:8000/api/signup', data, {
             headers: {
@@ -51,7 +55,7 @@ const Signup = () => {
             console.log(res.data)
             if (res.data.success === true) {
                 toast.success(res.data.message);
-                navigate('/login')
+                // navigate('/login')
             }
         }).catch((err) => {
             console.log('Signup Error 48: ', err.response.data)
@@ -70,7 +74,7 @@ const Signup = () => {
             <Paper style={paperStyle}>
                 <Grid align='center'>
                     {/* <h2>Sign Up</h2> */}
-                    <img src={logo} width={200} alt="" />
+                    {/* <img src={logo} width={200} alt="" /> */}
                     <Typography>Sign up to see photos and videos from your friends.</Typography>
                 </Grid>
                 <form>

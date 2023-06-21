@@ -37,7 +37,7 @@ const Header = () => {
         <>
             <AppBar sx={{ backgroundImage: "linear-gradient(to bottom, #ff1a66, #ff8566)" }}>
                 <Container>
-                    <Typography sx={{marginRight: 'auto'}}>Instagram</Typography>
+                    <Typography sx={{marginRight: 'auto'}}>ABC</Typography>
 
                     {
                         isMatch ? (
