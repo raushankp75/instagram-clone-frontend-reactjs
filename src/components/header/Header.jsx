@@ -35,7 +35,7 @@ const Header = () => {
 
     return (
         <>
-            <AppBar sx={{ background: '#063970' }}>
+            <AppBar sx={{ backgroundImage: "linear-gradient(to bottom, #ff1a66, #ff8566)" }}>
                 <Container>
                     <Typography sx={{marginRight: 'auto'}}>Instagram</Typography>
 
@@ -59,13 +59,12 @@ const Header = () => {
                                     ))
                                 }
 
-                                <Button sx={{ marginLeft: 'auto'}} variant="contained"><Link to='/' style={{textDecoration: 'none', color: 'white'}}>Signin</Link></Button>
+                                <Button sx={{ marginLeft: 'auto'}} variant="contained"><Link to='/' style={{textDecoration: 'none', color: 'white'}}>Login</Link></Button>
                                 {/* <Button sx={{ marginLeft: '10px' }} variant="contained"><Link to='/signup' style={{textDecoration: 'none', color: 'white'}}>Signup</Link></Button> */}
                             </>
                         )
                     }
                 </Container>
-
             </AppBar>
         </>
     )

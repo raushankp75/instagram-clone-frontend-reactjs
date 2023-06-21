@@ -10,7 +10,7 @@ import logo from '../assets/logo.png'
 
 const Signin=({handleChange})=>{
 
-    const paperStyle={padding :20,height:'60vh',width:300, margin:"0 auto"}
+    const paperStyle={padding :20,height:'55vh',width:300, margin:"0 auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'8px 0'}
     return(
@@ -40,7 +40,7 @@ const Signin=({handleChange})=>{
                 </Typography>
                 <Typography sx={{fontSize:'13px', textAlign: 'center', margin: '12px 0'}}> Do you have an account ?
                      <Link href="#" onClick={()=>handleChange("event",1)} >
-                        Sign Up 
+                        Sign up 
                 </Link>
                 </Typography>
             </Paper>

@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
+import { Grid } from '@mui/material';
 
 
 
@@ -41,25 +42,27 @@ const SigninSignupContainer = () => {
 
 
     return (
-        <Paper elevation={20} style={paperStyle}>
-            <Tabs
-                value={value}
-                indicatorColor="primary"
-                textColor="primary"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
-            >
-                <Tab label="Sign In" />
+        // <Grid style={{backgroundImage: "linear-gradient(to bottom, pink, red)", height: '82vh', margin: ''}}>
+            <Paper elevation={20} style={paperStyle}>
+                <Tabs
+                    value={value}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={handleChange}
+                    aria-label="disabled tabs example"
+                >
+                    <Tab label="Login" />
 
-                <Tab label="Sign Up" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-                <Signin handleChange={handleChange} />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Signup />
-            </TabPanel>
-        </Paper>
+                    <Tab label="Signup" />
+                </Tabs>
+                <TabPanel value={value} index={0}>
+                    <Signin handleChange={handleChange} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Signup />
+                </TabPanel>
+            </Paper>
+        // </Grid>
 
 
 

@@ -6,6 +6,9 @@ import CreatePost from './pages/CreatePost'
 import Profile from './pages/Profile'
 import SigninSignupContainer from './containers/signinSignupContainer'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
 
@@ -18,6 +21,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/' element={<SigninSignupContainer />} />
         </Routes>
+        <ToastContainer />
       </Layout>
       {/* <Navbar /> */}
     </>
