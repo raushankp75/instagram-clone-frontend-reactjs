@@ -29,70 +29,48 @@ const Profile = () => {
 
 <hr />
           <CardContent>
-            <Grid container>
-              <Grid item xs={4} border={1}>
+            <Grid container spacing={0.3}>
+              <Grid item xs={4}>
                 <CardMedia
                   component='img'
                   image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
                   alt=''
+                  sx={{ height: '200px', objectFit: 'fill' }}
                 />
               </Grid>
-              <Grid item xs={4} border={1}>
+              <Grid item xs={4}>
                 <CardMedia
                   component='img'
                   image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
                   alt=''
+                  sx={{ height: '200px', objectFit: 'fill' }}
                 />
               </Grid>
-              <Grid item xs={4} border={1}>
+              <Grid item xs={4}>
                 <CardMedia
                   component='img'
                   image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
                   alt=''
+                  sx={{ height: '200px', objectFit: 'fill' }}
                 />
               </Grid>
-              <Grid item xs={4} border={1}>
+              <Grid item xs={4}>
                 <CardMedia
                   component='img'
                   image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
                   alt=''
+                  sx={{ height: '200px', objectFit: 'fill' }}
                 />
               </Grid>
-              <Grid item xs={4} border={1}>
+              <Grid item xs={4}>
                 <CardMedia
                   component='img'
                   image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
                   alt=''
+                  sx={{ height: '200px', objectFit: 'fill' }}
                 />
               </Grid>
-              <Grid item xs={4} border={1}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                />
-              </Grid>
-              <Grid item xs={4} border={1}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                />
-              </Grid>
-              <Grid item xs={4} border={1}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                />
-              </Grid>
-              <Grid item xs={4} border={1}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                />
-              </Grid>
+             
             </Grid>
           </CardContent>
 
