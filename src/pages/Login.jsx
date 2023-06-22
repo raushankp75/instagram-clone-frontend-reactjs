@@ -73,7 +73,7 @@ const Login = ({ handleChange }) => {
                 <Grid align='center'>
                     {/* <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar> */}
                     {/* <h2>Sign In</h2> */}
-                    {/* <img src={logo} width={200} alt="" /> */}
+                    <img src={logo} width={200} alt="" />
                 </Grid>
                 <form>
                     <TextField sx={{ margin: '10px 0' }} type='email' name='email' value={data.email} onChange={handleValueChange} label='Email' placeholder='Enter email' fullWidth required />

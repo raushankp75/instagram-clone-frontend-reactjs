@@ -74,7 +74,7 @@ const Signup = () => {
             <Paper style={paperStyle}>
                 <Grid align='center'>
                     {/* <h2>Sign Up</h2> */}
-                    {/* <img src={logo} width={200} alt="" /> */}
+                    <img src={logo} width={200} alt="" />
                     <Typography>Sign up to see photos and videos from your friends.</Typography>
                 </Grid>
                 <form>
