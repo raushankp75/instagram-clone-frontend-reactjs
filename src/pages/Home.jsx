@@ -1,15 +1,21 @@
 import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+
+// mui icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+
 import axios from 'axios';
-import ReactTimeAgo from 'react-time-ago'
+// import ReactTimeAgo from 'react-time-ago'
 
 
 const Home = () => {
 
     const [data, setData] = useState([])
+    // const [like, setLike] = useState()
 
+
+    // get all post
     useEffect(() => {
         axios.get('http://localhost:8000/post/all', {
             headers: {
@@ -24,6 +30,56 @@ const Home = () => {
             console.log('Signup Error 48: ', err.response.data)
         })
     }, [])
+
+
+
+
+    // like post
+    const likePost = (e, id) => {
+        console.log(first)
+        e.preventDefault()
+
+        axios.put('http://localhost:8000/post/like', {
+            postId: id,
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then((res) => {
+            console.log(res.data)
+            // if (res.data.success === true) {
+            //     toast.success(res.data.message);
+            //     // navigate('/login')
+            // }
+        }).catch((err) => {
+            console.log('Like Error 55: ', err)
+            // toast.error(err.response.data.error);
+        })
+    }
+
+
+    // like post
+    const unlikePost = (e, id) => {
+        // console.log(id)
+        // e.preventDefault()
+
+        axios.put('http://localhost:8000/post/unlike', {
+            postId: id,
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then((res) => {
+            console.log(res.data)
+            // if (res.data.success === true) {
+            //     toast.success(res.data.message);
+            //     // navigate('/login')
+            // }
+        }).catch((err) => {
+            console.log('Like Error 55: ', err)
+            // toast.error(err.response.data.error);
+        })
+    }
 
 
     // const date = Date.parse(post.createdAt)
@@ -56,7 +112,8 @@ const Home = () => {
                                 sx={{ height: '400px', width: '100%', objectFit: 'fill' }}
                             />
                             <CardActions>
-                                <FavoriteIcon sx={{ padding: '0 10px' }} />
+                                <FavoriteIcon onClick= {() => {unlikePost(post._id)}} sx={{ padding: '0 10px', color:'#d9cfce', cursor: 'pointer' }} />
+                                <FavoriteIcon onClick= {() => {likePost(post._id)}} sx={{ padding: '0 10px', color:'red', cursor: 'pointer' }} />
                             </CardActions>
                             <Typography sx={{ padding: '0 20px' }}>2 like</Typography>
 
