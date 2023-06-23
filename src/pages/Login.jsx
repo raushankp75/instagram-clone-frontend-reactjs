@@ -51,6 +51,11 @@ const Login = ({ handleChange }) => {
             console.log(res.data)
             if (res.data.success === true) {
                 toast.success(res.data.message);
+                // saving Token to localhost
+                console.log(res.data.token)
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('email', res.data.email)
+                localStorage.setItem('role', res.data.role)
                 navigate('/home')
             }
         }).catch((err) => {
