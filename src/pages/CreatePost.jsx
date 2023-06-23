@@ -41,7 +41,7 @@ const CreatePost = () => {
           if (data.success === true) {
             toast.success(data.message);
             navigate('/home')
-          } else{
+          } else {
             toast.error(data.error)
           }
         })
@@ -88,7 +88,7 @@ const CreatePost = () => {
       .then(data => {
         // console.log(data.url)
         // setImageUrl(data.url)
-        setUrl(data.url.toString())
+        setUrl(data.url)
       })
       .catch(err => console.log(err))
 

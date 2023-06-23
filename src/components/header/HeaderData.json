@@ -1,14 +1,14 @@
 [
     {
         "name": "Home",
-        "link": "/home"
+        "link": "/user/home"
     },
     {
         "name": "Create post",
-        "link": "/create"
+        "link": "/user/create"
     },
     {
         "name": "Profile",
-        "link": "/profile"
+        "link": "/user/profile"
     }
 ]

@@ -54,9 +54,10 @@ const Login = ({ handleChange }) => {
                 // saving Token to localhost
                 console.log(res.data.token)
                 localStorage.setItem('token', res.data.token)
-                localStorage.setItem('email', res.data.email)
-                localStorage.setItem('role', res.data.role)
-                navigate('/home')
+                // localStorage.setItem('role', res.data.role)
+                // localStorage.setItem('email', res.data.email)
+                navigate('/user/home')
+                // setRole(localStorage.getItem('role'))
             }
         }).catch((err) => {
             console.log('Signup Error 48: ', err.response.data)

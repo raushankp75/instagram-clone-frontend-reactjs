@@ -4,6 +4,7 @@ import CottageIcon from '@mui/icons-material/Cottage';
 import DrawerComponent from './DrawerComponent';
 import HeaderData from './HeaderData.json';
 import { Link } from 'react-router-dom';
+import { isLoggesIn } from '../../auth/auth';
 
 
 // const pages = ['Create post', 'Profile'];
@@ -24,6 +25,10 @@ const Container = styled(Toolbar)`
 
 
 const Header = () => {
+    // const TOKEN = localStorage.getItem('token')
+    // console.log(28, TOKEN)
+
+
     const [value, setValue] = useState();
 
 
@@ -37,7 +42,7 @@ const Header = () => {
         <>
             <AppBar sx={{ backgroundImage: "linear-gradient(to bottom, #ff1a66, #ff8566)" }}>
                 <Container>
-                    <Typography sx={{marginRight: 'auto'}}>ABC</Typography>
+                    <Typography sx={{ marginRight: 'auto' }}>ABC</Typography>
 
                     {
                         isMatch ? (
@@ -53,13 +58,22 @@ const Header = () => {
                                         ))
                                     }
                                 </Tabs> */}
+
                                 {
-                                    HeaderData.map((page, index) => (
-                                        <Link to={page.link} key={index}>{page.name}</Link>
-                                    ))
+                                    isLoggesIn() ?
+                                        <>
+                                            {
+                                                HeaderData.map((page, index) => (
+                                                    <Link to={page.link} key={index}>{page.name}</Link>
+                                                ))
+                                            }
+                                        </> :
+                                        <Button sx={{ marginLeft: 'auto' }} variant="contained"><Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Login</Link></Button>
                                 }
 
-                                <Button sx={{ marginLeft: 'auto'}} variant="contained"><Link to='/' style={{textDecoration: 'none', color: 'white'}}>Login</Link></Button>
+
+
+
                                 {/* <Button sx={{ marginLeft: '10px' }} variant="contained"><Link to='/signup' style={{textDecoration: 'none', color: 'white'}}>Signup</Link></Button> */}
                             </>
                         )

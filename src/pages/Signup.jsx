@@ -42,10 +42,11 @@ const Signup = () => {
             // console.log('true')
             toast.error('Email must be required to signup or Invalid email');
             return
-        }else if(!passRegex.test(data.password)){
-            toast.error('Password must contain at least eight characters, at least 1 no. & 1 char, include upper & lowercase letters & special characters like #,!,? etc')
-            return
         }
+        // else if(!passRegex.test(data.password)){
+        //     toast.error('Password must contain at least eight characters, at least 1 no. & 1 char, include upper & lowercase letters & special characters like #,!,? etc')
+        //     return
+        // }
 
         axios.post('http://localhost:8000/api/signup', data, {
             headers: {
