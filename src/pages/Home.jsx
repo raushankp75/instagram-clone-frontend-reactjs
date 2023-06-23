@@ -23,7 +23,7 @@ const Home = () => {
         }).catch((err) => {
             console.log('Signup Error 48: ', err.response.data)
         })
-    })
+    }, [])
 
 
     // const date = Date.parse(post.createdAt)

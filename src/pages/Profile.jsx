@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, TextField, Typography } from '@mui/material'
+import axios from 'axios'
 
 const Profile = () => {
+
+  const [images, setImages] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/post/my', {
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    }).then((res) => {
+      console.log(res.data.post)
+      setImages(res.data.post)
+
+    }).catch((err) => {
+      console.log('Signup Error 48: ', err.response.data)
+    })
+  })
+
+
+
   return (
     <Grid container spacing={10}>
       <Grid item xs={12}>
@@ -17,60 +38,31 @@ const Profile = () => {
               <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
                 Raushan Kumar
               </Typography>
-              <Box sx={{display: 'flex', flexDirection: 'row', gap: '40px'}}>
-                <Typography fontSize={16}><Box component='span' sx={{fontWeight: 'bold'}}>15</Box> posts</Typography>
-                <Typography fontSize={16}><Box component='span' sx={{fontWeight: 'bold'}}>15</Box> followers</Typography>
-                <Typography fontSize={16}><Box component='span' sx={{fontWeight: 'bold'}}>15</Box> following</Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> posts</Typography>
+                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> followers</Typography>
+                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> following</Typography>
               </Box>
             </Box>
           </Box>
 
 
 
-<hr />
+          <hr />
           <CardContent>
             <Grid container spacing={0.3}>
-              <Grid item xs={4}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                  sx={{ height: '200px', objectFit: 'fill' }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                  sx={{ height: '200px', objectFit: 'fill' }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                  sx={{ height: '200px', objectFit: 'fill' }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                  sx={{ height: '200px', objectFit: 'fill' }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <CardMedia
-                  component='img'
-                  image='https://paulvanderlaken.files.wordpress.com/2020/02/post-box-11.jpg'
-                  alt=''
-                  sx={{ height: '200px', objectFit: 'fill' }}
-                />
-              </Grid>
-             
+              {images.map((image) => {
+                return (
+                  <Grid item xs={4}>
+                    <CardMedia
+                      component='img'
+                      image={image.image}
+                      alt=''
+                      sx={{ height: '200px', objectFit: 'fill' }}
+                    />
+                  </Grid>
+                )
+              })}
             </Grid>
           </CardContent>
 
