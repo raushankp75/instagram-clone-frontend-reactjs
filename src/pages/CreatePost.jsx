@@ -40,7 +40,7 @@ const CreatePost = () => {
           console.log(data.success)
           if (data.success === true) {
             toast.success(data.message);
-            navigate('/home')
+            navigate('/user/home')
           } else {
             toast.error(data.error)
           }

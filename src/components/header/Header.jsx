@@ -3,7 +3,7 @@ import { AppBar, Button, Tab, Tabs, Toolbar, Typography, useMediaQuery, useTheme
 import CottageIcon from '@mui/icons-material/Cottage';
 import DrawerComponent from './DrawerComponent';
 import HeaderData from './HeaderData.json';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isLoggesIn } from '../../auth/auth';
 
 
@@ -24,7 +24,10 @@ const Container = styled(Toolbar)`
 
 
 
+
 const Header = () => {
+    const navigate = useNavigate();
+    
     // const TOKEN = localStorage.getItem('token')
     // console.log(28, TOKEN)
 
@@ -37,6 +40,31 @@ const Header = () => {
 
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
     // console.log(isMatch)
+
+
+
+
+    // logout
+    const logout = async () => {
+        // try {
+        //   const response = await axios.post(
+        //     'http://localhost:3000/auth/logout',
+        //     {},
+        //     {
+        //       headers: {
+        //         'Content-Type': 'application/json',
+        //       },
+        //       withCredentials: true,
+        //     }
+        //   );
+
+        localStorage.clear();
+        setRole('');
+        navigate('/');
+        // } catch (error) {
+        //   console.error(error);
+        // }
+    };
 
     return (
         <>
@@ -67,6 +95,8 @@ const Header = () => {
                                                     <Link to={page.link} key={index}>{page.name}</Link>
                                                 ))
                                             }
+
+                                            <Button onClick={logout} sx={{ marginLeft: 'auto', backgroundColor: 'red' }} variant="contained"><Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Logout</Link></Button>
                                         </> :
                                         <Button sx={{ marginLeft: 'auto' }} variant="contained"><Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Login</Link></Button>
                                 }
