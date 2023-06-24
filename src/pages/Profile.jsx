@@ -24,54 +24,56 @@ const Profile = () => {
 
 
   return (
-    <Grid container spacing={10}>
-      <Grid item xs={12}>
-        <Card>
-          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
-            <CardMedia
-              component='img'
-              image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
-              alt=''
-              sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
-            />
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-              <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
-                {JSON.parse(localStorage.getItem('user')).name}
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
-                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> posts</Typography>
-                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> followers</Typography>
-                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> following</Typography>
+    <Box display="flex" justifyContent="center">
+      <Grid sx={{ width: '800px' }} container spacing={10}>
+        <Grid item xs={12}>
+          <Card>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
+              <CardMedia
+                component='img'
+                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                alt=''
+                sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
+              />
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
+                  {JSON.parse(localStorage.getItem('user')).name}
+                </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> posts</Typography>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> followers</Typography>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> following</Typography>
+                </Box>
               </Box>
             </Box>
-          </Box>
 
 
 
-          <hr />
-          <CardContent>
-            <Grid container spacing={0.3}>
-              {images.map((image) => {
-                return (
-                  <Grid item xs={4}>
-                    <CardMedia
-                      component='img'
-                      image={image.image}
-                      alt=''
-                      sx={{ height: '200px', objectFit: 'fill' }}
-                    />
-                  </Grid>
-                )
-              })}
-            </Grid>
-          </CardContent>
+            <hr />
+            <CardContent>
+              <Grid container spacing={0.3}>
+                {images.map((image) => {
+                  return (
+                    <Grid item xs={4}>
+                      <CardMedia
+                        component='img'
+                        image={image.image}
+                        alt=''
+                        sx={{ height: '200px', objectFit: 'fill' }}
+                      />
+                    </Grid>
+                  )
+                })}
+              </Grid>
+            </CardContent>
 
 
 
-        </Card>
+          </Card>
 
+        </Grid>
       </Grid>
-    </Grid>
+    </Box>
   )
 }
 

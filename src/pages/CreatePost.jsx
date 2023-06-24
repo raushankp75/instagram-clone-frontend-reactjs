@@ -162,63 +162,65 @@ const CreatePost = () => {
   }
 
   return (
-    <Box>
-      <Card sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'space-between' }}>
-          <Button>Back btn</Button>
-          <Typography>Create new post</Typography>
-          <Button onClick={handleSubmit} sx={{ fontWeight: 'bold', border: '1px solid blue' }}>Share</Button>
-        </Box>
-
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-          <Box>
-            <CardMedia
-              component='img'
-              image='https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
-              alt=''
-              sx={{ height: '400px', width: '400px', objectFit: 'fill' }}
-              id='output'
-            />
-
-            <Button
-              variant="contained"
-              component="label"
-              sx={{ width: '100%' }}
-            >
-              Click here to select an image
-              <input
-                type="file"
-                hidden
-                accept='image/*'
-                onChange={(event) => {
-                  loadfile(event);
-                  setImage(event.target.files[0])
-                }}
-              />
-            </Button>
+    <Box  display="flex" justifyContent="center" alignItems="center" minHeight="85vh">
+      <Box sx={{ width: '800px' }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'space-between' }}>
+            <Button>Back btn</Button>
+            <Typography>Create new post</Typography>
+            <Button onClick={handleSubmit} sx={{ fontWeight: 'bold', border: '1px solid blue' }}>Share</Button>
           </Box>
 
-
-          <CardContent>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '30px 10px' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+            <Box>
               <CardMedia
                 component='img'
-                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                image='https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
                 alt=''
-                sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                sx={{ height: '400px', width: '400px', objectFit: 'fill' }}
+                id='output'
               />
-              <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
-                Raushan Kumar
-              </Typography>
+
+              <Button
+                variant="contained"
+                component="label"
+                sx={{ width: '100%' }}
+              >
+                Click here to select an image
+                <input
+                  type="file"
+                  hidden
+                  accept='image/*'
+                  onChange={(event) => {
+                    loadfile(event);
+                    setImage(event.target.files[0])
+                  }}
+                />
+              </Button>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-              <TextField name='title' value={createPost.title} onChange={handleChange} variant='standard' placeholder='Write a caption title...' style={{ outline: 'none', border: 'none', width: '140%' }} />
-              <TextareaAutosize name='content' value={createPost.content} onChange={handleChange} minRows={2} maxRows={12} placeholder='Write a description...' style={{ outline: 'none', border: 'none', width: '140%', fontSize: '15px' }} />
-            </Box>
-          </CardContent>
-        </Box>
-      </Card>
+
+            <CardContent>
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '30px 10px' }}>
+                <CardMedia
+                  component='img'
+                  image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                  alt=''
+                  sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                />
+                <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
+                  Raushan Kumar
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+                <TextField name='title' value={createPost.title} onChange={handleChange} variant='standard' placeholder='Write a caption title...' style={{ outline: 'none', border: 'none', width: '170%' }} />
+                <TextareaAutosize name='content' value={createPost.content} onChange={handleChange} minRows={2} maxRows={12} placeholder='Write a description...' style={{ outline: 'none', border: 'none', width: '170%', fontSize: '15px' }} />
+              </Box>
+            </CardContent>
+          </Box>
+        </Card>
+      </Box>
     </Box>
   )
 }
