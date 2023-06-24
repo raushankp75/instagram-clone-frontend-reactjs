@@ -55,13 +55,16 @@ const Login = ({ handleChange }) => {
                 console.log(res.data.token)
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('role', res.data.role)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
                 // localStorage.setItem('email', res.data.email)
                 navigate('/user/home')
-                setRole(localStorage.getItem("role"))
+                // setRole(localStorage.getItem("role"))
             }
         }).catch((err) => {
-            console.log('Signup Error 48: ', err.response.data)
-            toast.error(err.response.data.error);
+            if (err.code === 'ERR_BAD_REQUEST') {
+                console.log('Signup Error 48: ', err.code)
+                toast.error(err.response.data.error);
+            }
         })
     }
 

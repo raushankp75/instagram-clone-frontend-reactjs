@@ -15,8 +15,7 @@ const Home = () => {
     // const [like, setLike] = useState()
 
 
-    // get all post
-    useEffect(() => {
+    const getAllPost = () => {
         axios.get('http://localhost:8000/post/all', {
             headers: {
                 'Content-Type': 'application/json',
@@ -29,66 +28,86 @@ const Home = () => {
         }).catch((err) => {
             console.log('Signup Error 48: ', err.response.data)
         })
+    } 
+
+
+    // get all post
+    useEffect(() => {
+        getAllPost()
     }, [])
 
 
 
 
     // like post
-    const likePost = (e, id) => {
-        console.log(first)
-        e.preventDefault()
-
-        axios.put('http://localhost:8000/post/like', {
-            postId: id,
+    const likePost = (id) => {
+        fetch("http://localhost:8000/post/like", {
+            method: "put",
             headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then((res) => {
-            console.log(res.data)
-            // if (res.data.success === true) {
-            //     toast.success(res.data.message);
-            //     // navigate('/login')
-            // }
-        }).catch((err) => {
-            console.log('Like Error 55: ', err)
-            // toast.error(err.response.data.error);
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+                postId: id,
+            }),
         })
-    }
+            .then((res) => res.json())
+            .then((result) => {
+                getAllPost()
+
+                // const newData = data.map((post) => {
+                //     // console.log(result._id)
+                //     if (post._id == result) {
+                //         return result;
+                //     } else {
+                //         return post;
+                //     }
+                // });
+                // setData(newData);
+                console.log(result);
+            });
+
+    };
 
 
     // like post
-    const unlikePost = (e, id) => {
-        // console.log(id)
-        // e.preventDefault()
-
-        axios.put('http://localhost:8000/post/unlike', {
-            postId: id,
+    const unlikePost = (id) => {
+        fetch("http://localhost:8000/post/unlike", {
+            method: "put",
             headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then((res) => {
-            console.log(res.data)
-            // if (res.data.success === true) {
-            //     toast.success(res.data.message);
-            //     // navigate('/login')
-            // }
-        }).catch((err) => {
-            console.log('Like Error 55: ', err)
-            // toast.error(err.response.data.error);
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+                postId: id,
+            }),
         })
-    }
+            .then((res) => res.json())
+            .then((result) => {
+                getAllPost()
+                
+                // const newData = data.map((post) => {
+                //     // console.log(result)
+                //     if (post._id == result) {
+                //         return result;
+                //     } else {
+                //         return post;
+                //     }
+                // });
+                // setData(newData);
+                console.log(result);
+            });
+    };
+
 
 
     // const date = Date.parse(post.createdAt)
 
     return (
         <Grid container spacing={10}>
-            {data.map((post) => {
+            {data.map((post, index) => {
                 return (
-                    <Grid item xs={12}>
+                    <Grid item xs={12} key={index}>
                         <Card>
                             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
                                 <CardMedia
@@ -111,11 +130,21 @@ const Home = () => {
                                 alt=''
                                 sx={{ height: '400px', width: '100%', objectFit: 'fill' }}
                             />
+
+                            {/* like and unlike post */}
                             <CardActions>
-                                <FavoriteIcon onClick= {() => {unlikePost(post._id)}} sx={{ padding: '0 10px', color:'#d9cfce', cursor: 'pointer' }} />
-                                <FavoriteIcon onClick= {() => {likePost(post._id)}} sx={{ padding: '0 10px', color:'red', cursor: 'pointer' }} />
+                                {
+                                    post.likes.includes(JSON.parse(localStorage.getItem('user'))._id) ?
+                                        (
+                                            <FavoriteIcon onClick={() => { unlikePost(post._id) }} sx={{ padding: '0 10px', color: 'red', cursor: 'pointer' }} />
+                                        ) :
+                                        (
+                                            <FavoriteIcon onClick={() => { likePost(post._id) }} sx={{ padding: '0 10px', color: '#d9cfce', cursor: 'pointer' }} />
+                                        )
+                                }
                             </CardActions>
-                            <Typography sx={{ padding: '0 20px' }}>2 like</Typography>
+
+                            <Typography sx={{ padding: '0 20px' }}>{post.likes.length} likes</Typography>
 
                             <CardContent>
                                 <Typography gutterBottom variant='h5' component='div'>

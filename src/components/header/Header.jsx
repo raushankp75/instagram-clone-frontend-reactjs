@@ -59,7 +59,7 @@ const Header = () => {
         //   );
 
         localStorage.clear();
-        setRole('');
+        // setRole('');
         navigate('/');
         // } catch (error) {
         //   console.error(error);

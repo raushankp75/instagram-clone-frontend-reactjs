@@ -19,7 +19,7 @@ const Profile = () => {
     }).catch((err) => {
       console.log('Signup Error 48: ', err.response.data)
     })
-  })
+  }, [])
 
 
 
@@ -36,7 +36,7 @@ const Profile = () => {
             />
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
               <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
-                Raushan Kumar
+                {JSON.parse(localStorage.getItem('user')).name}
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
                 <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> posts</Typography>
