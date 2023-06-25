@@ -23,7 +23,7 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='create' element={<CreatePost />} />
             <Route path='profile' element={<Profile />} />
-            <Route path='comment' element={<Comments />} />
+            {/* <Route path='comment' element={<Comments />} /> */}
           </Route>
           <Route path='*' element={<PageNotFound />} />
           <Route path='/' element={<SigninSignupContainer />} />

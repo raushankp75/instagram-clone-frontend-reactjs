@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Comments from './comments';
 
 
 const Home = () => {
@@ -18,6 +19,11 @@ const Home = () => {
 
     const [data, setData] = useState([])
     const [text, setText] = useState()
+
+    const [popup, setPopup] = useState(false)
+    const [commentPopupItems, setCommentPopupItems] = useState([])
+    console.log(23, popup);
+    
 
 
     const getAllPost = () => {
@@ -118,9 +124,10 @@ const Home = () => {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
         }).then((res) => {
-            console.log(res.data)
+            console.log(res.data.post.comments)
             if (res.data.success === true) {
                 toast.success(res.data.message);
+                getAllPost()
                 // console.log(res.data.message)
             }
         }).catch((err) => {
@@ -133,10 +140,23 @@ const Home = () => {
 
 
 
+    // handle popup
+    const handlePopup = (post) => {
+        setPopup(true)
+        setCommentPopupItems(post)
+        console.log(146,commentPopupItems)
+    }
+
+
+
+
+
     // const date = Date.parse(post.createdAt)
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="85vh">
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight="85vh" position="relative">
+            {popup && <Comments popup={setPopup} commentPopupItems={commentPopupItems} />}
+            {/* popup={setPopup}  */}
             <Grid sx={{ width: '700px' }} container spacing={10}>
                 {data.map((post, index) => {
                     return (
@@ -188,7 +208,12 @@ const Home = () => {
                                     </Typography>
                                 </CardContent>
 
+                                {/* comment popup function */}
+                                <Typography onClick={() => {handlePopup(post)}} sx={{cursor: 'pointer'}}>View all {post.comments.length} comments</Typography>
+
+
                                 <CardActions>
+                                    {/* <button onClick={handlePopup} className="bg-blue-200 px-3 py-1 shadow-md rounded-md">Add Task</button> */}
                                     <TextField value={text} onChange={(e) => setText(e.target.value)} variant='standard' placeholder='Add a comment...' minRows={1} maxRows={15} fullWidth />
                                     <AddReactionIcon />
                                     {/* <input type="text" value={text} onChange={(e) => setText(e.target.value)} /> */}
