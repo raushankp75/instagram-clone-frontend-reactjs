@@ -6,7 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 // import ReactTimeAgo from 'react-time-ago'
 
 import { toast } from 'react-toastify';
@@ -170,9 +170,9 @@ const Home = () => {
                                         alt=''
                                         sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                     />
-                                    <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
-                                        {post?.postedBy?.name}
-                                    </Typography>
+                                    {/* <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}> */}
+                                        <Link to={`/user/profile/${post?.postedBy?._id}`}>{post?.postedBy?.name}</Link>
+                                    {/* </Typography> */}
                                     <Typography fontSize={14} color={'GrayText'}>26 hour ago</Typography>
                                 </Box>
 

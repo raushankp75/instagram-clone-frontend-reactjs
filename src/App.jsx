@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './components/PageNotFound'
 import PrivateRoutes from './components/privateRoutes'
 import Comments from './pages/comments'
+import OtherUserProfile from './pages/OtherUserProfile'
 
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
           <Route path='/user' element={<PrivateRoutes />}>
             <Route path='home' element={<Home />} />
             <Route path='create' element={<CreatePost />} />
-            <Route path='profile' element={<Profile />} />
-            {/* <Route path='comment' element={<Comments />} /> */}
+            <Route exact path='profile' element={<Profile />} />
+            <Route path='profile/:userid' element={<OtherUserProfile />} />
           </Route>
           <Route path='*' element={<PageNotFound />} />
           <Route path='/' element={<SigninSignupContainer />} />
