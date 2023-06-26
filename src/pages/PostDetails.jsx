@@ -3,11 +3,49 @@ import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Gri
 
 import CloseIcon from '@mui/icons-material/Close';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-const PostDetails = ({ popup, commentPopupItems }) => {
-    // console.log("from comment", commentPopupItems)
-    // console.log(7, popup)
+const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
+    const navigate = useNavigate();
+
+
+
+    // delete post function
+    const deletePost = (id) => {
+        console.log(15, id)
+
+        if (window.confirm('Are you sure to delete this post?')) {
+            axios.delete(`http://localhost:8000/post/delete/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            }).then((res) => {
+                console.log(res)
+                if (res.data.success === true) {
+                    popup(false)
+                    toast.success(res.data.message);
+                    getMyPost()             // fix problem when delete not refresh profile page
+                    navigate('/user/profile')
+
+                    // console.log(res.data.message)
+                }
+            }).catch((err) => {
+                if (err.code === 'ERR_BAD_REQUEST') {
+                console.log('Add commment error: ', err)
+                    toast.error(err.response.data.error);
+                }
+            })
+        }
+    }
+
+
+
     return (
         <Box>
             <Box sx={{ position: 'fixed', width: '100vw', height: '100vh', top: '0', left: '0', backgroundColor: 'black', opacity: '0.5' }}></Box>
@@ -36,9 +74,10 @@ const PostDetails = ({ popup, commentPopupItems }) => {
                                 alt=''
                                 sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                             />
-                            <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
-                                {commentPopupItems.postedBy.name}
-                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '180px' }}>
+                                <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>{commentPopupItems.postedBy.name}</Typography>
+                                <Button onClick={() => { deletePost(commentPopupItems._id) }}>Delete Post</Button>
+                            </Box>
                         </Box>
 
                         <hr />

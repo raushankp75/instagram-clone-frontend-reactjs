@@ -12,7 +12,7 @@ const Profile = () => {
 
 
 
-  useEffect(() => {
+  const getMyPost = () => {
     axios.get('http://localhost:8000/post/my', {
       headers: {
         'Content-Type': 'application/json',
@@ -25,6 +25,10 @@ const Profile = () => {
     }).catch((err) => {
       console.log('Signup Error 48: ', err.response.data)
     })
+  }
+
+  useEffect(() => {
+    getMyPost();
   }, [])
 
 
@@ -42,7 +46,7 @@ const Profile = () => {
   return (
     <Box display="flex" justifyContent="center">
 
-      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} />}
+      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />}
 
       <Grid sx={{ width: '800px' }} container spacing={10}>
         <Grid item xs={12}>
