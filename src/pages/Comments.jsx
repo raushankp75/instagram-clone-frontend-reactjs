@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, TextField, TextareaAutosize, Typography } from '@mui/material'
 
 import CloseIcon from '@mui/icons-material/Close';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 
-const Comments = ({ popup, commentPopupItems }) => {
+const Comments = ({ popup, commentPopupItems, text, setText, addComment }) => {
     // console.log("from comment", commentPopupItems)
     // console.log(7, popup)
     return (
@@ -40,7 +40,7 @@ const Comments = ({ popup, commentPopupItems }) => {
 
                         <hr />
 
-                        <Box sx={{ height: '300px', overflowY: 'auto'}}>
+                        <Box sx={{ height: '300px', overflowY: 'auto' }}>
                             {/* comment section */}
                             {
                                 commentPopupItems.comments.map((comment, index) => {
@@ -71,9 +71,12 @@ const Comments = ({ popup, commentPopupItems }) => {
                             <CardActions>
                                 {/* <button onClick={handlePopup} className="bg-blue-200 px-3 py-1 shadow-md rounded-md">Add Task</button> */}
                                 <AddReactionIcon />
-                                <TextField variant='standard' placeholder='Add a comment...' minRows={1} maxRows={15} fullWidth />
+                                <TextField value={text} onChange={(e) => setText(e.target.value)} variant='standard' placeholder='Add a comment...' minRows={1} maxRows={15} fullWidth />
                                 {/* <input type="text" value={text} onChange={(e) => setText(e.target.value)} /> */}
-                                <Button sx={{ color: 'blue', fontWeight: 'bold', border: '1px solid blue', marginLeft: '10px' }}>Post</Button>
+                                <Button onClick={() => {
+                                    addComment(commentPopupItems._id)
+                                    popup(false)
+                                }} sx={{ color: 'blue', fontWeight: 'bold', border: '1px solid blue', marginLeft: '10px' }}>Post</Button>
                             </CardActions>
                         </Box>
                     </CardContent>

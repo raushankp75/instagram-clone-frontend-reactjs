@@ -45,7 +45,7 @@ const Home = () => {
     // get all post
     useEffect(() => {
         getAllPost()
-    }, [])
+    }, [popup])
 
 
 
@@ -126,6 +126,7 @@ const Home = () => {
         }).then((res) => {
             console.log(res.data.post.comments)
             if (res.data.success === true) {
+                setText('');
                 toast.success(res.data.message);
                 getAllPost()
                 // console.log(res.data.message)
@@ -155,7 +156,7 @@ const Home = () => {
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="85vh" position="relative">
-            {popup && <Comments popup={setPopup} commentPopupItems={commentPopupItems} />}
+            {popup && <Comments popup={setPopup} commentPopupItems={commentPopupItems} text={text} setText={setText} addComment={addComment} />}
             {/* popup={setPopup}  */}
             <Grid sx={{ width: '700px' }} container spacing={10}>
                 {data.map((post, index) => {
