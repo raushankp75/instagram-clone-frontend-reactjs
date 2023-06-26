@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, TextField, Typography } from '@mui/material'
 import axios from 'axios'
+import PostDetails from './PostDetails'
 
 const Profile = () => {
 
-  const [images, setImages] = useState([])
+  const [data, setData] = useState([])
+
+  const [popup, setPopup] = useState(false)
+  const [commentPopupItems, setCommentPopupItems] = useState([])
+
+
 
   useEffect(() => {
     axios.get('http://localhost:8000/post/my', {
@@ -14,7 +20,7 @@ const Profile = () => {
       }
     }).then((res) => {
       console.log(res.data.post)
-      setImages(res.data.post)
+      setData(res.data.post)
 
     }).catch((err) => {
       console.log('Signup Error 48: ', err.response.data)
@@ -23,8 +29,21 @@ const Profile = () => {
 
 
 
+
+  // handle popup
+  const handlePopup = (post) => {
+    setPopup(true)
+    setCommentPopupItems(post)
+    // console.log(146,commentPopupItems)
+  }
+
+
+
   return (
     <Box display="flex" justifyContent="center">
+
+      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} />}
+
       <Grid sx={{ width: '800px' }} container spacing={10}>
         <Grid item xs={12}>
           <Card>
@@ -52,14 +71,15 @@ const Profile = () => {
             <hr />
             <CardContent>
               <Grid container spacing={0.3}>
-                {images.map((image) => {
+                {data.map((post) => {
                   return (
                     <Grid item xs={4}>
                       <CardMedia
                         component='img'
-                        image={image.image}
+                        image={post.image}
                         alt=''
-                        sx={{ height: '200px', objectFit: 'fill' }}
+                        sx={{ height: '200px', objectFit: 'fill', cursor: 'pointer' }}
+                        onClick={() => {handlePopup(post)}}
                       />
                     </Grid>
                   )
