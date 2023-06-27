@@ -6,7 +6,10 @@ import ProfilePicture from '../components/ProfilePicture'
 
 const Profile = () => {
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
+
+  const [user, setUser] = useState('')
+  const [post, setPost] = useState([])
 
   const [popup, setPopup] = useState(false)
   const [commentPopupItems, setCommentPopupItems] = useState([])
@@ -17,15 +20,32 @@ const Profile = () => {
 
 
 
+  // const getMyPost = () => {
+  //   axios.get('http://localhost:8000/post/my', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "Authorization": "Bearer " + localStorage.getItem("token")
+  //     }
+  //   }).then((res) => {
+  //     console.log(res.data.post)
+  //     setData(res.data.post)
+
+  //   }).catch((err) => {
+  //     console.log('Signup Error 48: ', err.response.data)
+  //   })
+  // }
+
+
   const getMyPost = () => {
-    axios.get('http://localhost:8000/post/my', {
+    axios.get(`http://localhost:8000/user/${JSON.parse(localStorage.getItem('user'))._id}`, {
       headers: {
         'Content-Type': 'application/json',
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
     }).then((res) => {
-      console.log(res.data.post)
-      setData(res.data.post)
+      console.log(res.data)
+      setUser(res.data.user)
+      setPost(res.data.post)
 
     }).catch((err) => {
       console.log('Signup Error 48: ', err.response.data)
@@ -78,9 +98,9 @@ const Profile = () => {
                   {JSON.parse(localStorage.getItem('user')).name}
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> posts</Typography>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> followers</Typography>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>15</Box> following</Typography>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post ? post.length : '0'}</Box> posts</Typography>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
+                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
                 </Box>
               </Box>
             </Box>
@@ -90,7 +110,7 @@ const Profile = () => {
             <hr />
             <CardContent>
               <Grid container spacing={0.3}>
-                {data.map((post) => {
+                {post.map((post) => {
                   return (
                     <Grid item xs={4}>
                       <CardMedia
