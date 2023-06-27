@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, TextField, Typography } from '@mui/material'
 import axios from 'axios'
 import PostDetails from './PostDetails'
+import ProfilePicture from '../components/ProfilePicture'
 
 const Profile = () => {
 
@@ -9,6 +10,10 @@ const Profile = () => {
 
   const [popup, setPopup] = useState(false)
   const [commentPopupItems, setCommentPopupItems] = useState([])
+
+
+  // for open popup of upload profile pic
+  const [changePic, setChangePic] = useState(false);
 
 
 
@@ -42,11 +47,20 @@ const Profile = () => {
   }
 
 
+// for open popup of upload profile pic
+  const chnageProfilePic = () => {
+    setChangePic(true)
+  }
+
+
 
   return (
     <Box display="flex" justifyContent="center">
 
+
       {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />}
+      {changePic && <ProfilePicture changePic={setChangePic} /> }
+
 
       <Grid sx={{ width: '800px' }} container spacing={10}>
         <Grid item xs={12}>
@@ -56,7 +70,8 @@ const Profile = () => {
                 component='img'
                 image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
                 alt=''
-                sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
+                sx={{ width: '140px', height: '140px', borderRadius: '50%', cursor: 'pointer' }}
+                onClick={chnageProfilePic}
               />
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                 <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
@@ -90,9 +105,6 @@ const Profile = () => {
                 })}
               </Grid>
             </CardContent>
-
-
-
           </Card>
 
         </Grid>
