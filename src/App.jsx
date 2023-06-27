@@ -12,6 +12,7 @@ import PageNotFound from './components/PageNotFound'
 import PrivateRoutes from './components/privateRoutes'
 import Comments from './pages/comments'
 import OtherUserProfile from './pages/OtherUserProfile'
+import MyFollowingPosts from './pages/MyFollowingPosts'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='create' element={<CreatePost />} />
             <Route exact path='profile' element={<Profile />} />
             <Route path='profile/:userid' element={<OtherUserProfile />} />
+            <Route path='posts' element={<MyFollowingPosts />} />
           </Route>
           <Route path='*' element={<PageNotFound />} />
           <Route path='/' element={<SigninSignupContainer />} />

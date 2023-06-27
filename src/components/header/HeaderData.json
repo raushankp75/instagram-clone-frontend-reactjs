@@ -8,6 +8,10 @@
         "link": "/user/create"
     },
     {
+        "name": "Following posts",
+        "link": "/user/posts"
+    },
+    {
         "name": "Profile",
         "link": "/user/profile"
     }
