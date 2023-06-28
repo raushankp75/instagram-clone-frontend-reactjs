@@ -37,7 +37,7 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
                 }
             }).catch((err) => {
                 if (err.code === 'ERR_BAD_REQUEST') {
-                console.log('Add commment error: ', err)
+                    console.log('Add commment error: ', err)
                     toast.error(err.response.data.error);
                 }
             })
@@ -76,7 +76,10 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '180px' }}>
                                 <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>{commentPopupItems.postedBy.name}</Typography>
-                                <Button onClick={() => { deletePost(commentPopupItems._id) }}>Delete Post</Button>
+                                <Button
+                                    onClick={() => { deletePost(commentPopupItems._id) }}>
+                                    Delete Post
+                                </Button>
                             </Box>
                         </Box>
 

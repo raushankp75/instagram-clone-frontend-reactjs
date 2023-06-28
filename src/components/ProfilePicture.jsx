@@ -1,9 +1,14 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const ProfilePicture = ({ changePic }) => {
+
+
+
+const ProfilePicture = ({ changePic, getMyPost }) => {
 
     // for show input hidden file input tag
     const hiddenFileInput = useRef(null)
@@ -17,7 +22,7 @@ const ProfilePicture = ({ changePic }) => {
 
     // send image to cloudinary
     const submitPic = () => {
-        console.log(createPost, image)
+        console.log(image)
         const data = new FormData();
         data.append('file', image)
         data.append('upload_preset', 'instagram')
@@ -56,12 +61,17 @@ const ProfilePicture = ({ changePic }) => {
         }).then(res => res.json())
             .then(data => {
                 console.log(data)
-                // if (data.success === true) {
-                //     toast.success(data.message);
-                //     navigate('/user/home')
-                // } else {
-                //     toast.error(data.error)
-                // }
+                changePic(false)
+                getMyPost();
+                // submitPic();
+                // window.location.reload();
+
+                if (data.success === true) {
+                    toast.success(data.message);
+                    navigate('/user/profile')
+                } else {
+                    toast.error(data.error)
+                }
             })
             .catch(err => { 
                 console.log(err)
@@ -94,7 +104,7 @@ const ProfilePicture = ({ changePic }) => {
         hiddenFileInput.current.click()
     }
 
-    
+
 
     return (
         <Box>

@@ -8,6 +8,8 @@ const Profile = () => {
 
   // const [data, setData] = useState([])
 
+  const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
   const [user, setUser] = useState('')
   const [post, setPost] = useState([])
 
@@ -79,7 +81,7 @@ const Profile = () => {
 
 
       {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />}
-      {changePic && <ProfilePicture changePic={setChangePic} /> }
+      {changePic && <ProfilePicture changePic={setChangePic} getMyPost={getMyPost} /> }
 
 
       <Grid sx={{ width: '800px' }} container spacing={10}>
@@ -88,7 +90,7 @@ const Profile = () => {
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
               <CardMedia
                 component='img'
-                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                image={user.image ? user.image : profilePictureLink}
                 alt=''
                 sx={{ width: '140px', height: '140px', borderRadius: '50%', cursor: 'pointer' }}
                 onClick={chnageProfilePic}

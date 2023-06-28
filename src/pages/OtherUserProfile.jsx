@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 
 const OtherUserProfile = () => {
 
+    const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
     const { userid } = useParams()
 
     const [user, setUser] = useState('')
@@ -121,7 +123,7 @@ const OtherUserProfile = () => {
                         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
                             <CardMedia
                                 component='img'
-                                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                image={user.image ? user.image : profilePictureLink}
                                 alt=''
                                 sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
                             />
