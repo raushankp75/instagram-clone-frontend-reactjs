@@ -36,6 +36,7 @@ const Signup = () => {
     const emailRegex = /^\w+([\.-]?\w)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 
+
     // for post data to the api
     const Signup = (e) => {
         e.preventDefault()
@@ -70,7 +71,44 @@ const Signup = () => {
 
 
 
+    // continue with google - send data to api and check
+    const ContinueWithGoogle = (credentialResponse) => {
+        console.log(credentialResponse);
+        const jwtDetail = jwt_decode(credentialResponse.credential);
+        console.log('jwtDetail', jwtDetail);
 
+
+        axios.post('http://localhost:8000/api/loginwithgoogle', {
+            name: jwtDetail.name,
+            email: jwtDetail.email,
+            email_verified: jwtDetail.email_verified,
+            clientId: credentialResponse.clientId,
+            image: jwtDetail.picture,
+        }, 
+            {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
+            console.log(res.data)
+            if (res.data.success === true) {
+                toast.success(res.data.message);
+                // saving Token to localhost
+                console.log(res.data)
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
+                // localStorage.setItem('role', res.data.role)
+                // localStorage.setItem('email', res.data.email)
+                navigate('/user/home')
+                // setRole(localStorage.getItem("role"))
+            }
+        }).catch((err) => {
+            if (err.code === 'ERR_BAD_REQUEST') {
+                console.log('Signup Error 48: ', err.code)
+                toast.error(err.response.data.error);
+            }
+        })
+    }
     
 
 
@@ -101,11 +139,12 @@ const Signup = () => {
 
 
                     {/* signup with google button */}
-                    <GoogleLogin
+                    <GoogleLogin 
                         onSuccess={credentialResponse => {
-                            console.log(credentialResponse);
-                            const jwtDetail = jwt_decode(credentialResponse.credential);
-                            console.log('jwtDetail', jwtDetail);
+                            // console.log(credentialResponse);
+                            // const jwtDetail = jwt_decode(credentialResponse.credential);
+                            // console.log('jwtDetail', jwtDetail);
+                            ContinueWithGoogle(credentialResponse);
                         }}
                         onError={() => {
                             console.log('Login Failed');

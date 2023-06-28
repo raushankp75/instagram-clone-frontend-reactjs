@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <GoogleOAuthProvider clientId="476878337369-r8gmptnr03icojq3qaro37drgv65ngoe.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="476878337369-7nvg3aq68s10nqmd8apg1odq5eb0568m.apps.googleusercontent.com">
         <Layout>
           <Routes>
             <Route path='/user' element={<PrivateRoutes />}>
