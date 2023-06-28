@@ -11,6 +11,8 @@ import { Grid } from '@mui/material';
 
 
 
+
+
 const SigninSignupContainer = () => {
 
     const [value, setValue] = useState(0)
@@ -43,25 +45,27 @@ const SigninSignupContainer = () => {
 
     return (
         // <Grid style={{backgroundImage: "linear-gradient(to bottom, pink, red)", height: '82vh', margin: ''}}>
-            <Paper elevation={20} style={paperStyle}>
-                <Tabs
-                    value={value}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    onChange={handleChange}
-                    aria-label="disabled tabs example"
-                >
-                    <Tab label="Login" />
+        <Paper elevation={20} style={paperStyle}>
+            <Tabs
+                value={value}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={handleChange}
+                aria-label="disabled tabs example"
+            >
+                <Tab label="Login" />
 
-                    <Tab label="Signup" />
-                </Tabs>
-                <TabPanel value={value} index={0}>
-                    <Login handleChange={handleChange} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <Signup />
-                </TabPanel>
-            </Paper>
+                <Tab label="Signup" />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+
+                <Login handleChange={handleChange} />
+
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <Signup />
+            </TabPanel>
+        </Paper>
         // </Grid>
 
 

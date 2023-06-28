@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material'
+import { Grid, Paper, Avatar, Typography, TextField, Button, Box } from '@mui/material'
 // import AddCircleOutlineOutlinedIcon from '@mui/material/icons/AddCircleOutlineOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,6 +10,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { GoogleLogin } from '@react-oauth/google';
+
+import jwt_decode from "jwt-decode";
 
 
 const Signup = () => {
@@ -38,7 +42,7 @@ const Signup = () => {
         // console.log(data);
 
         // checking email validation
-        if(!emailRegex.test(data.email)){
+        if (!emailRegex.test(data.email)) {
             // console.log('true')
             toast.error('Email must be required to signup or Invalid email');
             return
@@ -67,9 +71,14 @@ const Signup = () => {
 
 
 
-    const paperStyle = { padding: 20, height: '65vh', width: 300, margin: "0 auto" }
+    
+
+
+
+
+    const paperStyle = { padding: 20, height: '70vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const marginTop = { margin: '8px 0' }
+    // const marginTop = { margin: '0' }
     return (
         <Grid>
             <Paper style={paperStyle}>
@@ -79,14 +88,31 @@ const Signup = () => {
                     <Typography>Sign up to see photos and videos from your friends.</Typography>
                 </Grid>
                 <form>
-                    <TextField sx={{ margin: '10px 0' }} type='text' name='name' value={data.name} onChange={handleChange} label='Full Name' placeholder='Enter full name' fullWidth required />
-                    <TextField sx={{ margin: '10px 0' }} type='email' name='email' value={data.email} onChange={handleChange} label='Email' placeholder='Enter email' fullWidth required />
-                    <TextField sx={{ margin: '10px 0' }} type='password' name='password' value={data.password} onChange={handleChange} label='Password' placeholder="Enter password" fullWidth required />
+                    <TextField sx={{ margin: '7px 0' }} type='text' name='name' value={data.name} onChange={handleChange} label='Full Name' placeholder='Enter full name' fullWidth required />
+                    <TextField sx={{ margin: '7px 0' }} type='email' name='email' value={data.email} onChange={handleChange} label='Email' placeholder='Enter email' fullWidth required />
+                    <TextField sx={{ margin: '7px 0' }} type='password' name='password' value={data.password} onChange={handleChange} label='Password' placeholder="Enter password" fullWidth required />
                     {/* <FormControlLabel
                         control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
                     /> */}
                     <Button type='submit' onClick={Signup} variant='contained' color='primary' fullWidth>Sign up</Button>
+                    <Typography sx={{ textAlign: 'center', fontSize: '13px', margin: '5px 0' }}>OR</Typography>
+                    {/* <Button type='submit' onClick={Signup} fullWidth sx={{backgroundColor: 'white', color: 'black', textAlign: 'center', border: '1px solid gray'}}> <img style={{width:'25px', margin: '0 10px'}} src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="google image" /> google</Button> */}
+
+
+                    {/* signup with google button */}
+                    <GoogleLogin
+                        onSuccess={credentialResponse => {
+                            console.log(credentialResponse);
+                            const jwtDetail = jwt_decode(credentialResponse.credential);
+                            console.log('jwtDetail', jwtDetail);
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
+                    />
+
+
                     <Typography sx={{ fontSize: '13px', textAlign: 'center', margin: '10px 0' }}> Already signup?
                         <Link href="#" onClick={() => handleChange("event", 1)} >
                             Log in

@@ -71,7 +71,7 @@ const Login = ({ handleChange }) => {
 
 
 
-    const paperStyle = { padding: 20, height: '55vh', width: 300, margin: "0 auto" }
+    const paperStyle = { padding: 20, height: '62vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
 
@@ -97,6 +97,8 @@ const Login = ({ handleChange }) => {
                     label="Remember me"
                  /> */}
                     <Button type='submit' onClick={Login} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                    <Typography sx={{ textAlign: 'center', fontSize: '13px', margin: '5px 0' }}>OR</Typography>
+                    <Button type='submit' fullWidth sx={{ backgroundColor: 'white', color: 'black', textAlign: 'center', border: '1px solid gray' }}> <img style={{ width: '25px', margin: '0 10px' }} src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="google image" /> google</Button>
                     <Typography sx={{ fontSize: '13px', textAlign: 'center', margin: '12px 0' }}>
                         <Link href="#" >
                             Forgot password ?
