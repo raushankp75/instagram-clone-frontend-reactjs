@@ -135,6 +135,10 @@ const ProfilePicture = ({ changePic, getMyPost }) => {
                     />
 
                     <Button
+                    onClick={() => { 
+                        setUrl(null) 
+                        sendPicToApi()
+                    }}
                         sx={{ color: 'black', textTransform: 'capitalize', fontSize: '18px', borderTop: '1px solid gray' }}>
                         Remove Photo
                     </Button>

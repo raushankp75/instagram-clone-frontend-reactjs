@@ -70,7 +70,7 @@ const Header = () => {
         <>
             <AppBar sx={{ backgroundImage: "linear-gradient(to bottom, #ff1a66, #ff8566)" }}>
                 <Container>
-                    <Typography sx={{ marginRight: 'auto' }}>ABC</Typography>
+                    <Typography onClick={() => {navigate('/user/home')}} sx={{ marginRight: 'auto', cursor: 'pointer' }}>Instagram</Typography>
 
                     {
                         isMatch ? (
