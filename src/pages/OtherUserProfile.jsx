@@ -4,9 +4,16 @@ import axios from 'axios'
 import PostDetails from './PostDetails'
 import { useParams } from 'react-router-dom'
 
+import Loader from '../components/Loader'
+
+
+
 const OtherUserProfile = () => {
 
     const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
+    // for loader
+    const [IsLoading, setIsLoading] = useState(false);
 
     const { userid } = useParams()
 
@@ -20,6 +27,7 @@ const OtherUserProfile = () => {
 
     // get user profile
     const getMyPost = () => {
+        setIsLoading(true);
         axios.get(`http://localhost:8000/user/${userid}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -34,6 +42,7 @@ const OtherUserProfile = () => {
             if (res.data.user.followers.includes(JSON.parse(localStorage.getItem('user'))._id)) {
                 setIsFollow(true)
             }
+            setIsLoading(false);
 
         }).catch((err) => {
             console.log('Signup Error 48: ', err.response.data)
@@ -114,77 +123,82 @@ const OtherUserProfile = () => {
 
     return (
         <Box display="flex" justifyContent="center">
+            {
+                IsLoading ? <Loader /> : (
+                    <>
+                        {/* {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />} */}
 
-            {/* {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />} */}
+                        <Grid sx={{ width: '800px' }} container spacing={10}>
+                            <Grid item xs={12}>
+                                <Card>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
+                                        <CardMedia
+                                            component='img'
+                                            image={user.image ? user.image : profilePictureLink}
+                                            alt=''
+                                            sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
+                                        />
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                                            <Box sx={{ display: 'flex', flexDirection: 'row', gap: '30px', alignItems: 'center' }}>
+                                                <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>{user.name}</Typography>
 
-            <Grid sx={{ width: '800px' }} container spacing={10}>
-                <Grid item xs={12}>
-                    <Card>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
-                            <CardMedia
-                                component='img'
-                                image={user.image ? user.image : profilePictureLink}
-                                alt=''
-                                sx={{ width: '140px', height: '140px', borderRadius: '50%' }}
-                            />
-                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '30px', alignItems: 'center' }}>
-                                    <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>{user.name}</Typography>
+                                                {/* conditionaliy render function on follow and unfollow */}
+                                                <Box>
+                                                    <Button
+                                                        onClick={() => {
+                                                            if (isFollow) {
+                                                                unfollowUser(user._id)
+                                                            } else {
+                                                                followUser(user._id)
+                                                            }
+                                                        }}
+                                                        sx={{ textTransform: 'capitalize', border: '2px solid black', padding: '2px 20px' }}>
+                                                        {isFollow ? 'Unfollow' : 'Follow'}
+                                                    </Button>
+                                                </Box>
+                                            </Box>
 
-                                    {/* conditionaliy render function on follow and unfollow */}
-                                    <Box>
-                                        <Button
-                                            onClick={() => {
-                                                if (isFollow) {
-                                                    unfollowUser(user._id)
-                                                } else {
-                                                    followUser(user._id)
-                                                }
-                                            }}
-                                            sx={{ textTransform: 'capitalize', border: '2px solid black', padding: '2px 20px' }}>
-                                            {isFollow ? 'Unfollow' : 'Follow'}
-                                        </Button>
+
+                                            {/* follow and following count */}
+                                            <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                                                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post.length}</Box> Post</Typography>
+                                                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
+                                                <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
+                                            </Box>
+                                        </Box>
                                     </Box>
-                                </Box>
-
-
-                                {/* follow and following count */}
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
-                                    <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post.length}</Box> Post</Typography>
-                                    <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
-                                    <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
-                                </Box>
-                            </Box>
-                        </Box>
 
 
 
-                        <hr />
-                        {/* post image view */}
-                        <CardContent>
-                            <Grid container spacing={0.3}>
-                                {post.map((post) => {
-                                    return (
-                                        <Grid item xs={4}>
-                                            <CardMedia
-                                                component='img'
-                                                image={post.image}
-                                                alt=''
-                                                sx={{ height: '200px', objectFit: 'fill', cursor: 'pointer' }}
-                                            // onClick={() => {handlePopup(post)}}
-                                            />
+                                    <hr />
+                                    {/* post image view */}
+                                    <CardContent>
+                                        <Grid container spacing={0.3}>
+                                            {post.map((post) => {
+                                                return (
+                                                    <Grid item xs={4}>
+                                                        <CardMedia
+                                                            component='img'
+                                                            image={post.image}
+                                                            alt=''
+                                                            sx={{ height: '200px', objectFit: 'fill', cursor: 'pointer' }}
+                                                        // onClick={() => {handlePopup(post)}}
+                                                        />
+                                                    </Grid>
+                                                )
+                                            })}
                                         </Grid>
-                                    )
-                                })}
+                                    </CardContent>
+
+
+
+                                </Card>
+
                             </Grid>
-                        </CardContent>
-
-
-
-                    </Card>
-
-                </Grid>
-            </Grid>
+                        </Grid>
+                    </>
+                )
+            }
         </Box>
     )
 }

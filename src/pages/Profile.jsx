@@ -4,12 +4,16 @@ import axios from 'axios'
 import PostDetails from './PostDetails'
 import ProfilePicture from '../components/ProfilePicture'
 import { Link } from 'react-router-dom'
+import Loader from '../components/Loader'
 
 const Profile = () => {
 
   // const [data, setData] = useState([])
 
   const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
+  // for loader
+  const [IsLoading, setIsLoading] = useState(false);
 
   const [user, setUser] = useState('')
   const [post, setPost] = useState([])
@@ -41,6 +45,7 @@ const Profile = () => {
 
 
   const getMyPost = () => {
+    setIsLoading(true);
     axios.get(`http://localhost:8000/user/${JSON.parse(localStorage.getItem('user'))._id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -51,6 +56,7 @@ const Profile = () => {
       console.log(res.data.post)
       setUser(res.data.user)
       setPost(res.data.post)
+      setIsLoading(false);
 
     }).catch((err) => {
       console.log('Signup Error 48: ', err.response.data)
@@ -70,10 +76,10 @@ const Profile = () => {
     setCommentPopupItems(post)
     setUserItem(user)
   }
-  
-  console.log(146,commentPopupItems)
 
-// for open popup of upload profile pic
+  console.log(146, commentPopupItems)
+
+  // for open popup of upload profile pic
   const chnageProfilePic = () => {
     setChangePic(true)
   }
@@ -83,60 +89,67 @@ const Profile = () => {
   return (
     <Box display="flex" justifyContent="center">
 
-
-      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} userItem={userItem} getMyPost={getMyPost} />}
-      {changePic && <ProfilePicture changePic={setChangePic} getMyPost={getMyPost} /> }
-
-
-      <Grid sx={{ width: '800px' }} container spacing={10}>
-        <Grid item xs={12}>
-          <Card>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
-              <CardMedia
-                component='img'
-                image={user.image ? user.image : profilePictureLink}
-                alt=''
-                sx={{ width: '140px', height: '140px', borderRadius: '50%', cursor: 'pointer' }}
-                onClick={chnageProfilePic}
-              />
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
-                  {JSON.parse(localStorage.getItem('user')).name}
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post ? post.length : '0'}</Box> posts</Typography>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
-                  <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
-                  {/* <Link to={`/user/followers/${user._id}`} fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Link> */}
-                  {/* <Link to='/user/following' fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Link> */}
-                </Box>
-              </Box>
-            </Box>
+      {
+        IsLoading ? <Loader /> : (
+          <>
+            {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} userItem={userItem} getMyPost={getMyPost} IsLoading={IsLoading} />}
+            {changePic && <ProfilePicture changePic={setChangePic} getMyPost={getMyPost} />}
 
 
+            <Grid sx={{ width: '800px' }} container spacing={10}>
+              <Grid item xs={12}>
+                <Card>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
+                    <CardMedia
+                      component='img'
+                      image={user.image ? user.image : profilePictureLink}
+                      alt=''
+                      sx={{ width: '140px', height: '140px', borderRadius: '50%', cursor: 'pointer' }}
+                      onClick={chnageProfilePic}
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                      <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600', fontSize: '30px' }}>
+                        {JSON.parse(localStorage.getItem('user')).name}
+                      </Typography>
+                      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                        <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post ? post.length : '0'}</Box> posts</Typography>
+                        <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
+                        <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
+                        {/* <Link to={`/user/followers/${user._id}`} fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Link> */}
+                        {/* <Link to='/user/following' fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Link> */}
+                      </Box>
+                    </Box>
+                  </Box>
 
-            <hr />
-            <CardContent>
-              <Grid container spacing={0.3}>
-                {post.map((post) => {
-                  return (
-                    <Grid item xs={4}>
-                      <CardMedia
-                        component='img'
-                        image={post.image}
-                        alt=''
-                        sx={{ height: '200px', objectFit: 'fill', cursor: 'pointer' }}
-                        onClick={() => {handlePopup(post)}}
-                      />
+
+
+                  <hr />
+                  <CardContent>
+                    <Grid container spacing={0.3}>
+                      {
+
+                        post && post.map((post) => {
+                          return (
+                            <Grid item xs={4}>
+                              <CardMedia
+                                component='img'
+                                image={post.image}
+                                alt=''
+                                sx={{ height: '200px', objectFit: 'fill', cursor: 'pointer' }}
+                                onClick={() => { handlePopup(post) }}
+                              />
+                            </Grid>
+                          )
+                        })
+                      }
                     </Grid>
-                  )
-                })}
-              </Grid>
-            </CardContent>
-          </Card>
+                  </CardContent>
+                </Card>
 
-        </Grid>
-      </Grid>
+              </Grid>
+            </Grid>
+          </>
+        )}
     </Box>
   )
 }
