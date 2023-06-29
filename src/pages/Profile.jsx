@@ -16,6 +16,7 @@ const Profile = () => {
 
   const [popup, setPopup] = useState(false)
   const [commentPopupItems, setCommentPopupItems] = useState([])
+  const [userItem, setUserItem] = useState('')
 
 
   // for open popup of upload profile pic
@@ -46,7 +47,8 @@ const Profile = () => {
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
     }).then((res) => {
-      console.log(res.data)
+      console.log(res.data.user)
+      console.log(res.data.post)
       setUser(res.data.user)
       setPost(res.data.post)
 
@@ -66,9 +68,10 @@ const Profile = () => {
   const handlePopup = (post) => {
     setPopup(true)
     setCommentPopupItems(post)
-    // console.log(146,commentPopupItems)
+    setUserItem(user)
   }
-
+  
+  console.log(146,commentPopupItems)
 
 // for open popup of upload profile pic
   const chnageProfilePic = () => {
@@ -81,7 +84,7 @@ const Profile = () => {
     <Box display="flex" justifyContent="center">
 
 
-      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} getMyPost={getMyPost} />}
+      {popup && <PostDetails popup={setPopup} commentPopupItems={commentPopupItems} userItem={userItem} getMyPost={getMyPost} />}
       {changePic && <ProfilePicture changePic={setChangePic} getMyPost={getMyPost} /> }
 
 

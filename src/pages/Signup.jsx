@@ -4,7 +4,7 @@ import { Grid, Paper, Avatar, Typography, TextField, Button, Box } from '@mui/ma
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
@@ -84,46 +84,46 @@ const Signup = () => {
             email_verified: jwtDetail.email_verified,
             clientId: credentialResponse.clientId,
             image: jwtDetail.picture,
-        }, 
+        },
             {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((res) => {
-            console.log(res.data)
-            if (res.data.success === true) {
-                toast.success(res.data.message);
-                // saving Token to localhost
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
                 console.log(res.data)
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('user', JSON.stringify(res.data.user))
-                // localStorage.setItem('role', res.data.role)
-                // localStorage.setItem('email', res.data.email)
-                navigate('/user/home')
-                // setRole(localStorage.getItem("role"))
-            }
-        }).catch((err) => {
-            if (err.code === 'ERR_BAD_REQUEST') {
-                console.log('Signup Error 48: ', err.code)
-                toast.error(err.response.data.error);
-            }
-        })
+                if (res.data.success === true) {
+                    toast.success(res.data.message);
+                    // saving Token to localhost
+                    console.log(res.data)
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('user', JSON.stringify(res.data.user))
+                    // localStorage.setItem('role', res.data.role)
+                    // localStorage.setItem('email', res.data.email)
+                    navigate('/user/home')
+                    // setRole(localStorage.getItem("role"))
+                }
+            }).catch((err) => {
+                if (err.code === 'ERR_BAD_REQUEST') {
+                    console.log('Signup Error 48: ', err.code)
+                    toast.error(err.response.data.error);
+                }
+            })
     }
-    
 
 
 
 
-    const paperStyle = { padding: 20, height: '70vh', width: 300, margin: "0 auto" }
+
+    const paperStyle = { padding: 20, height: '58vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     // const marginTop = { margin: '0' }
     return (
         <Grid>
             <Paper style={paperStyle}>
-                <Grid align='center'>
-                    {/* <h2>Sign Up</h2> */}
-                    <img src={logo} width={200} alt="" />
-                    <Typography>Sign up to see photos and videos from your friends.</Typography>
+                <Grid sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', margin: '15px 0' }}>
+                    {/* <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar> */}
+
+                    <img src='https://cdn-icons-png.flaticon.com/128/174/174855.png' width={40} alt="" /><span style={{ fontFamily: "'Pacifico', cursive", fontSize: '26px' }}>Instagram Clone</span>
                 </Grid>
                 <form>
                     <TextField sx={{ margin: '7px 0' }} type='text' name='name' value={data.name} onChange={handleChange} label='Full Name' placeholder='Enter full name' fullWidth required />
@@ -139,7 +139,7 @@ const Signup = () => {
 
 
                     {/* signup with google button */}
-                    <GoogleLogin 
+                    <GoogleLogin
                         onSuccess={credentialResponse => {
                             // console.log(credentialResponse);
                             // const jwtDetail = jwt_decode(credentialResponse.credential);

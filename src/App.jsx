@@ -29,11 +29,11 @@ function App() {
             <Route path='/user' element={<PrivateRoutes />}>
               <Route path='home' element={<Home />} />
               <Route path='create' element={<CreatePost />} />
-              <Route exact path='profile' element={<Profile />} />
+              <Route path='profile' element={<Profile />} />
               <Route path='profile/:userid' element={<OtherUserProfile />} />
               <Route path='posts' element={<MyFollowingPosts />} />
               <Route path='followers/:id' element={<Followers />} />
-              <Route path='following' element={<Following />} />
+              <Route path='following/:id' element={<Following />} />
             </Route>
             <Route path='*' element={<PageNotFound />} />
             <Route path='/' element={<SigninSignupContainer />} />

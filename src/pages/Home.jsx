@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react'
 // mui icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import {FaRegComment} from 'react-icons/fa'
+import {FcLike} from 'react-icons/fc'
+import {AiOutlineHeart} from 'react-icons/ai'
 
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -194,16 +197,17 @@ const Home = () => {
                                 />
 
                                 {/* like and unlike post */}
-                                <CardActions>
+                                <CardActions sx={{display:'flex', flexDirection:'row', gap:'20px', margin: '5px 15px'}}>
                                     {
                                         post.likes.includes(JSON.parse(localStorage.getItem('user'))._id) ?
                                             (
-                                                <FavoriteIcon onClick={() => { unlikePost(post._id) }} sx={{ padding: '0 10px', color: 'red', cursor: 'pointer' }} />
+                                                <FcLike onClick={() => { unlikePost(post._id) }} size={32} style={{cursor:'pointer'}} />
                                             ) :
                                             (
-                                                <FavoriteIcon onClick={() => { likePost(post._id) }} sx={{ padding: '0 10px', color: '#d9cfce', cursor: 'pointer' }} />
+                                                <AiOutlineHeart onClick={() => { likePost(post._id) }} size={32} style={{cursor:'pointer'}} />
                                             )
                                     }
+                                    <FaRegComment onClick={() => {handlePopup(post)}} size={30} style={{cursor:'pointer'}} />
                                 </CardActions>
 
                                 <Typography sx={{ padding: '0 20px' }}>{post.likes.length} likes</Typography>

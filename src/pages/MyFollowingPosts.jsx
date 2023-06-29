@@ -6,7 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import {FaRegComment} from 'react-icons/fa'
 import {FcLike} from 'react-icons/fc'
-import {FcLikePlaceholder} from 'react-icons/fc'
+import {AiOutlineHeart} from 'react-icons/ai'
 
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -197,10 +197,10 @@ const MyFollowingPosts = () => {
                                     {
                                         post.likes.includes(JSON.parse(localStorage.getItem('user'))._id) ?
                                             (
-                                                <FcLike onClick={() => { unlikePost(post._id) }} size={30} style={{cursor:'pointer'}} />
+                                                <FcLike onClick={() => { unlikePost(post._id) }} size={32} style={{cursor:'pointer'}} />
                                             ) :
                                             (
-                                                <FcLikePlaceholder onClick={() => { likePost(post._id) }} size={30} style={{cursor:'pointer'}} />
+                                                <AiOutlineHeart onClick={() => { likePost(post._id) }} size={32} style={{cursor:'pointer'}} />
                                             )
                                     }
 

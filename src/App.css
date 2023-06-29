@@ -9,3 +9,14 @@
         padding: '80px 4px';
     }
 } */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&family=Pacifico&display=swap');
+
+
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Pacifico', cursive; */
+
+
+.fontOpenSansBold{
+    font-family: 'Open Sans', sans-serif;
+}

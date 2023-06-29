@@ -4,7 +4,7 @@ import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@mui/m
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -71,7 +71,7 @@ const Login = ({ handleChange }) => {
 
 
 
-    const paperStyle = { padding: 20, height: '62vh', width: 300, margin: "0 auto" }
+    const paperStyle = { padding: 20, height: '58vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
 
@@ -79,14 +79,14 @@ const Login = ({ handleChange }) => {
     return (
         <Grid>
             <Paper style={paperStyle} >
-                <Grid align='center'>
+                <Grid sx={{display:'flex', alignItems:'center', justifyContent:'center', gap:'10px', margin:'15px 0'}}>
                     {/* <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar> */}
-                    {/* <h2>Sign In</h2> */}
-                    <img src={logo} width={200} alt="" />
+                    
+                    <img src='https://cdn-icons-png.flaticon.com/128/174/174855.png' width={40} alt="" /><span style={{fontFamily: "'Pacifico', cursive", fontSize: '26px'}}>Instagram Clone</span>
                 </Grid>
                 <form>
-                    <TextField sx={{ margin: '10px 0' }} type='email' name='email' value={data.email} onChange={handleValueChange} label='Email' placeholder='Enter email' fullWidth required />
-                    <TextField sx={{ margin: '10px 0' }} type='password' name='password' value={data.password} onChange={handleValueChange} label='Password' placeholder='Enter password' fullWidth required />
+                    <TextField sx={{ margin: '7px 0' }} type='email' name='email' value={data.email} onChange={handleValueChange} label='Email' placeholder='Enter email' fullWidth required />
+                    <TextField sx={{ margin: '7px 0' }} type='password' name='password' value={data.password} onChange={handleValueChange} label='Password' placeholder='Enter password' fullWidth required />
                     {/* <FormControlLabel
                     control={
                     <Checkbox

@@ -9,10 +9,18 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import moment from 'moment'
 
-const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
+
+const PostDetails = ({ popup, commentPopupItems, userItem, getMyPost }) => {
+    const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
+    const postedByName = 'Name here'
+
     const navigate = useNavigate();
 
+    console.log(16, commentPopupItems)
+    console.log(17, userItem)
 
 
     // delete post function
@@ -70,7 +78,7 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '15px' }}>
                             <CardMedia
                                 component='img'
-                                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                image={commentPopupItems?.postedBy?.image ? commentPopupItems?.postedBy?.image : profilePictureLink}
                                 alt=''
                                 sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                             />
@@ -78,14 +86,14 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
                                 <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>{commentPopupItems.postedBy.name}</Typography>
                                 <Button
                                     onClick={() => { deletePost(commentPopupItems._id) }}>
-                                    Delete Post
+                                    Delete
                                 </Button>
                             </Box>
                         </Box>
 
                         <hr />
 
-                        <Box sx={{ height: '380px', overflowY: 'auto' }}>
+                        <Box sx={{ height: '340px', overflowY: 'auto' }}>
                             {/* comment section */}
 
                             {
@@ -94,14 +102,14 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
                                         <Box sx={{ display: 'flex', flexDirection: 'row', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
                                             <CardMedia
                                                 component='img'
-                                                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                                image={comment.postedBy.image ? comment.postedBy.image : profilePictureLink}
                                                 alt=''
                                                 sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                             />
                                             <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
-                                                {comment?.postedBy?.name}
+                                                {comment?.postedBy?.name ? comment?.postedBy?.name : postedByName}
                                                 <span style={{ fontWeight: 'normal' }}> {comment?.text}</span>
-                                                <Typography fontSize={14} color={'GrayText'}>26 hour ago</Typography>
+                                                <Typography fontSize={14} color={'GrayText'}>{moment(comment.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
                                             </Typography>
                                         </Box>
                                     )
@@ -112,6 +120,7 @@ const PostDetails = ({ popup, commentPopupItems, getMyPost }) => {
 
 
                         <Typography>{commentPopupItems.likes.length} likes</Typography>
+                        <Typography fontSize={14} color={'GrayText'}> <span style={{color: 'black', fontWeight: 'bold'}}>Post Created: </span> {moment(commentPopupItems?.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
 
                     </CardContent>
                 </Card>

@@ -4,8 +4,12 @@ import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Gri
 import CloseIcon from '@mui/icons-material/Close';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
+import moment from 'moment'
+
 
 const Comments = ({ popup, commentPopupItems, text, setText, addComment }) => {
+
+    const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
     // console.log("from comment", commentPopupItems)
     // console.log(7, popup)
     return (
@@ -29,7 +33,7 @@ const Comments = ({ popup, commentPopupItems, text, setText, addComment }) => {
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '15px' }}>
                             <CardMedia
                                 component='img'
-                                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                image={commentPopupItems.postedBy.image ? commentPopupItems.postedBy.image : profilePictureLink}
                                 alt=''
                                 sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                             />
@@ -48,14 +52,14 @@ const Comments = ({ popup, commentPopupItems, text, setText, addComment }) => {
                                         <Box key={index} sx={{ display: 'flex', flexDirection: 'row', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
                                             <CardMedia
                                                 component='img'
-                                                image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                                image={comment.postedBy.image ? comment.postedBy.image : profilePictureLink}
                                                 alt=''
                                                 sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                             />
                                             <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
                                                 {comment?.postedBy?.name}
                                                 <span style={{ fontWeight: 'normal' }}> {comment?.text}</span>
-                                                <Typography fontSize={14} color={'GrayText'}>26 hour ago</Typography>
+                                                <Typography fontSize={14} color={'GrayText'}>{moment(comment.postedBy.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
                                             </Typography>
                                         </Box>
                                     )
