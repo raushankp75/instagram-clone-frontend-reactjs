@@ -3,6 +3,7 @@ import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Gri
 import axios from 'axios'
 import PostDetails from './PostDetails'
 import ProfilePicture from '../components/ProfilePicture'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
 
@@ -103,6 +104,8 @@ const Profile = () => {
                   <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{post ? post.length : '0'}</Box> posts</Typography>
                   <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Typography>
                   <Typography fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Typography>
+                  {/* <Link to={`/user/followers/${user._id}`} fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.followers ? user.followers.length : '0'}</Box> followers</Link> */}
+                  {/* <Link to='/user/following' fontSize={16}><Box component='span' sx={{ fontWeight: 'bold' }}>{user.following ? user.following.length : '0'}</Box> following</Link> */}
                 </Box>
               </Box>
             </Box>

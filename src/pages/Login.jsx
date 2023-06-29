@@ -98,12 +98,12 @@ const Login = ({ handleChange }) => {
                  /> */}
                     <Button type='submit' onClick={Login} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                     <Typography sx={{ textAlign: 'center', fontSize: '13px', margin: '5px 0' }}>OR</Typography>
-                    <Button type='submit' fullWidth sx={{ backgroundColor: 'white', color: 'black', textAlign: 'center', border: '1px solid gray' }}> <img style={{ width: '25px', margin: '0 10px' }} src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="google image" /> google</Button>
-                    <Typography sx={{ fontSize: '13px', textAlign: 'center', margin: '12px 0' }}>
+                    {/* <Button type='submit' fullWidth sx={{ backgroundColor: 'white', color: 'black', textAlign: 'center', border: '1px solid gray' }}> <img style={{ width: '25px', margin: '0 10px' }} src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="google image" /> google</Button> */}
+                    {/* <Typography sx={{ fontSize: '13px', textAlign: 'center', margin: '12px 0' }}>
                         <Link href="#" >
                             Forgot password ?
                         </Link>
-                    </Typography>
+                    </Typography> */}
                     <Typography sx={{ fontSize: '13px', textAlign: 'center', margin: '12px 0' }}> Do you have an account ?
                         <Link href="#" onClick={() => handleChange("event", 1)} >
                             Sign up

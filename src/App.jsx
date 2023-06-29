@@ -15,6 +15,8 @@ import OtherUserProfile from './pages/OtherUserProfile'
 import MyFollowingPosts from './pages/MyFollowingPosts'
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import Followers from './pages/Followers'
+import Following from './pages/Following'
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
               <Route exact path='profile' element={<Profile />} />
               <Route path='profile/:userid' element={<OtherUserProfile />} />
               <Route path='posts' element={<MyFollowingPosts />} />
+              <Route path='followers/:id' element={<Followers />} />
+              <Route path='following' element={<Following />} />
             </Route>
             <Route path='*' element={<PageNotFound />} />
             <Route path='/' element={<SigninSignupContainer />} />

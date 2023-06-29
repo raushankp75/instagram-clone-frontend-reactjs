@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = () => {
 
+  const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
   const navigate = useNavigate();
 
   const [createPost, setCreatePost] = useState({
@@ -19,6 +21,9 @@ const CreatePost = () => {
 
   // const [imageUrl, setImageUrl] = useState();
   const [url, setUrl] = useState("");
+
+   // get user data by id - logged in user
+  const [user, setUser] = useState('')
 
 
 
@@ -161,13 +166,43 @@ const CreatePost = () => {
     }
   }
 
+
+
+
+
+
+
+
+
+  // get user data by id - logged in user
+  const getMyPost = () => {
+    axios.get(`http://localhost:8000/user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    }).then((res) => {
+      console.log(res.data)
+      setUser(res.data.user)
+      
+
+    }).catch((err) => {
+      console.log('Signup Error 48: ', err.response.data)
+    })
+  }
+
+  useEffect(() => {
+    getMyPost();
+  }, [])
+
+
   return (
-    <Box  display="flex" justifyContent="center" alignItems="center" minHeight="85vh">
-      <Box sx={{ width: '800px' }}>
+    <Box  display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
+      <Box sx={{ width: '900px' }}>
         <Card sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'space-between' }}>
             <Button>Back btn</Button>
-            <Typography>Create new post</Typography>
+            <Typography sx={{fontSize: '25px', fontWeight: '600'}}>Create new post</Typography>
             <Button onClick={handleSubmit} sx={{ fontWeight: 'bold', border: '1px solid blue' }}>Share</Button>
           </Box>
 
@@ -177,7 +212,7 @@ const CreatePost = () => {
                 component='img'
                 image='https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
                 alt=''
-                sx={{ height: '400px', width: '400px', objectFit: 'fill' }}
+                sx={{ height: '400px', width: '500px', objectFit: 'fill' }}
                 id='output'
               />
 
@@ -204,18 +239,18 @@ const CreatePost = () => {
               <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '30px 10px' }}>
                 <CardMedia
                   component='img'
-                  image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                  image={user.image ? user.image : profilePictureLink}
                   alt=''
                   sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                 />
                 <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
-                  Raushan Kumar
+                {JSON.parse(localStorage.getItem('user')).name}
                 </Typography>
               </Box>
 
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
                 <TextField name='title' value={createPost.title} onChange={handleChange} variant='standard' placeholder='Write a caption title...' style={{ outline: 'none', border: 'none', width: '170%' }} />
-                <TextareaAutosize name='content' value={createPost.content} onChange={handleChange} minRows={2} maxRows={12} placeholder='Write a description...' style={{ outline: 'none', border: 'none', width: '170%', fontSize: '15px' }} />
+                <TextareaAutosize name='content' value={createPost.content} onChange={handleChange} minRows={1} maxRows={12} placeholder='Write a description...' style={{ outline: 'none', border: 'none', width: '170%', fontSize: '15px', fontFamily: 'sans-serif', letterSpacing: '2px' }} />
               </Box>
             </CardContent>
           </Box>

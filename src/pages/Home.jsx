@@ -13,6 +13,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Comments from './comments';
 
+import ReactTimeAgo from 'react-time-ago'
+import moment from 'moment'
+
 
 const Home = () => {
 
@@ -174,10 +177,11 @@ const Home = () => {
                                         alt=''
                                         sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                     />
-                                    {/* <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}> */}
-                                        <Link to={`/user/profile/${post?.postedBy?._id}`}>{post?.postedBy?.name}</Link>
-                                    {/* </Typography> */}
-                                    <Typography fontSize={14} color={'GrayText'}>26 hour ago</Typography>
+                                    <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
+                                        <Link to={`/user/profile/${post?.postedBy?._id}`} style={{ textDecoration: 'none', color: 'black'}}>{post?.postedBy?.name}</Link>
+                                    </Typography>
+                                    {/* <Typography fontSize={14} color={'GrayText'}><ReactTimeAgo date={Date.parse(post.createdAt)} locale="en-US"/></Typography> */}
+                                    <Typography fontSize={14} color={'GrayText'}>{moment(post?.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
                                 </Box>
 
                                 <CardMedia
@@ -214,7 +218,7 @@ const Home = () => {
                                 </CardContent>
 
                                 {/* comment popup function */}
-                                <Typography onClick={() => {handlePopup(post)}} sx={{cursor: 'pointer'}}>View all {post.comments.length} comments</Typography>
+                                <Typography onClick={() => {handlePopup(post)}} sx={{cursor: 'pointer', padding: '0 17px'}}>View all {post.comments.length} comments</Typography>
 
 
                                 <CardActions>

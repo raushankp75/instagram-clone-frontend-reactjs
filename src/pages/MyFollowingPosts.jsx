@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react'
 // mui icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import {FaRegComment} from 'react-icons/fa'
+import {FcLike} from 'react-icons/fc'
+import {FcLikePlaceholder} from 'react-icons/fc'
 
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -13,8 +16,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Comments from './comments';
 
+import moment from 'moment'
+
 
 const MyFollowingPosts = () => {
+    const profilePictureLink = 'https://cdn-icons-png.flaticon.com/128/149/149071.png'
+
     const { id } = useParams();
 
     const [data, setData] = useState([])
@@ -166,14 +173,14 @@ const MyFollowingPosts = () => {
                                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
                                     <CardMedia
                                         component='img'
-                                        image='https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'
+                                        image={post.postedBy.image ? post.postedBy.image : profilePictureLink}
                                         alt=''
                                         sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                     />
-                                    {/* <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}> */}
-                                        <Link to={`/user/profile/${post?.postedBy?._id}`}>{post?.postedBy?.name}</Link>
-                                    {/* </Typography> */}
-                                    <Typography fontSize={14} color={'GrayText'}>26 hour ago</Typography>
+                                    <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>
+                                        <Link to={`/user/profile/${post?.postedBy?._id}`} style={{ textDecoration: 'none', color: 'black'}}>{post?.postedBy?.name}</Link>
+                                    </Typography>
+                                    <Typography fontSize={14} color={'GrayText'}>{moment(post?.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
                                 </Box>
 
                                 <CardMedia
@@ -186,16 +193,18 @@ const MyFollowingPosts = () => {
                                 />
 
                                 {/* like and unlike post */}
-                                <CardActions>
+                                <CardActions sx={{display:'flex', flexDirection:'row', gap:'20px', margin: '5px 15px'}}>
                                     {
                                         post.likes.includes(JSON.parse(localStorage.getItem('user'))._id) ?
                                             (
-                                                <FavoriteIcon onClick={() => { unlikePost(post._id) }} sx={{ padding: '0 10px', color: 'red', cursor: 'pointer' }} />
+                                                <FcLike onClick={() => { unlikePost(post._id) }} size={30} style={{cursor:'pointer'}} />
                                             ) :
                                             (
-                                                <FavoriteIcon onClick={() => { likePost(post._id) }} sx={{ padding: '0 10px', color: '#d9cfce', cursor: 'pointer' }} />
+                                                <FcLikePlaceholder onClick={() => { likePost(post._id) }} size={30} style={{cursor:'pointer'}} />
                                             )
                                     }
+
+                                    <FaRegComment onClick={() => {handlePopup(post)}} size={30} style={{cursor:'pointer'}} />
                                 </CardActions>
 
                                 <Typography sx={{ padding: '0 20px' }}>{post.likes.length} likes</Typography>
@@ -210,7 +219,7 @@ const MyFollowingPosts = () => {
                                 </CardContent>
 
                                 {/* comment popup function */}
-                                <Typography onClick={() => {handlePopup(post)}} sx={{cursor: 'pointer'}}>View all {post.comments.length} comments</Typography>
+                                <Typography onClick={() => {handlePopup(post)}} sx={{cursor: 'pointer', padding: '0 17px'}}>View all {post.comments.length} comments</Typography>
 
 
                                 <CardActions>
