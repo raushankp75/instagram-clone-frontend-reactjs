@@ -20,6 +20,7 @@ import ReactTimeAgo from 'react-time-ago'
 import moment from 'moment'
 
 import Loader from '../components/Loader'
+import EmojiPicker from 'emoji-picker-react';
 
 
 const Home = () => {
@@ -238,7 +239,8 @@ const Home = () => {
                                     <CardActions>
                                         {/* <button onClick={handlePopup} className="bg-blue-200 px-3 py-1 shadow-md rounded-md">Add Task</button> */}
                                         <TextField value={text} onChange={(e) => setText(e.target.value)} variant='standard' placeholder='Add a comment...' minRows={1} maxRows={15} fullWidth />
-                                        <AddReactionIcon />
+                                        {/* <AddReactionIcon /> */}
+                                        {/* <EmojiPicker /> */}
                                         {/* <input type="text" value={text} onChange={(e) => setText(e.target.value)} /> */}
                                         <Button onClick={() => { addComment(post._id) }} sx={{ color: 'blue', fontWeight: 'bold', border: '1px solid blue', marginLeft: '10px' }}>Post</Button>
                                     </CardActions>

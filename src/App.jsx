@@ -17,6 +17,7 @@ import MyFollowingPosts from './pages/MyFollowingPosts'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Followers from './pages/Followers'
 import Following from './pages/Following'
+import EmojiPicker from 'emoji-picker-react'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
               <Route path='posts' element={<MyFollowingPosts />} />
               <Route path='followers/:id' element={<Followers />} />
               <Route path='following/:id' element={<Following />} />
+              <Route path='emojipicker' element={<EmojiPicker />} />
             </Route>
             <Route path='*' element={<PageNotFound />} />
             <Route path='/' element={<SigninSignupContainer />} />

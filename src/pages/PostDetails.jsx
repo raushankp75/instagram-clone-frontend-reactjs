@@ -79,28 +79,28 @@ const PostDetails = ({ popup, commentPopupItems, userItem, getMyPost, IsLoading 
 
 
                                 <CardContent sx={{ width: '47%' }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '15px' }}>
-                                        <CardMedia
-                                            component='img'
-                                            image={commentPopupItems?.postedBy?.image ? commentPopupItems?.postedBy?.image : profilePictureLink}
-                                            alt=''
-                                            sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
-                                        />
-                                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '180px' }}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <Grid sx={{ display: 'flex', gap: '15px' }}>
+                                            <CardMedia
+                                                component='img'
+                                                image={commentPopupItems?.postedBy?.image ? commentPopupItems?.postedBy?.image : profilePictureLink}
+                                                alt=''
+                                                sx={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                            />
                                             <Typography gutterBottom sx={{ margin: '6px 0', fontWeight: '600' }}>{commentPopupItems.postedBy.name}</Typography>
-                                            <Button
-                                                onClick={() => { deletePost(commentPopupItems._id) }}>
-                                                Delete
-                                            </Button>
-                                        </Box>
+                                        </Grid>
+
+                                        <Button onClick={() => { deletePost(commentPopupItems._id) }}>
+                                            Delete
+                                        </Button>
                                     </Box>
 
                                     <hr />
 
-                                    <Box sx={{ height: '340px', overflowY: 'auto' }}>
+                                    <Box sx={{ height: '320px', overflowY: 'auto' }}>
                                         {/* comment section */}
 
-                                        {
+                                        {/* {
                                             commentPopupItems.comments.map((comment, index) => {
                                                 return (
                                                     <Box sx={{ display: 'flex', flexDirection: 'row', alignContent: 'center', alignSelf: 'center', gap: '15px', margin: '10px 10px' }}>
@@ -118,13 +118,20 @@ const PostDetails = ({ popup, commentPopupItems, userItem, getMyPost, IsLoading 
                                                     </Box>
                                                 )
                                             })
-                                        }
+                                        } */}
 
+
+                                        <Typography sx={{ fontSize: '16px' }}>{commentPopupItems?.content}</Typography>
                                     </Box>
 
 
-                                    <Typography>{commentPopupItems.likes.length} likes</Typography>
+                                    <Box sx={{display:'flex', flexDirection:'column', gap:'15px'}}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <Typography sx={{ fontSize: '20px' }}><span style={{ fontWeight: 'bold' }}>{commentPopupItems.likes.length}</span> likes</Typography>
+                                        <Typography sx={{ fontSize: '20px' }}><span style={{ fontWeight: 'bold' }}>{commentPopupItems.comments.length}</span> comments</Typography>
+                                    </Box>
                                     <Typography fontSize={14} color={'GrayText'}> <span style={{ color: 'black', fontWeight: 'bold' }}>Post Created: </span> {moment(commentPopupItems?.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</Typography>
+                                    </Box>
 
                                 </CardContent>
                             </>
